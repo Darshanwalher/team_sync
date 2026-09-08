@@ -1,21 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginEmployee } from "./authAction";
 
 const authSlice = createSlice({
-    name:"auth",
-    initialState:{
-        employee: null,
-        isLoading: false
+  name: "auth",
+  initialState: {
+    employee: null,
+    isLoading: false
+  },
+  reducers: {
+    addEmployee: (state, action) => {
+      state.employee = action.payload;
+      state.isLoading = false;
     },
-    reducers:{
-       addEmployee:(state,action)=>{
-            state.employee = action.payload;
-            state.isLoading = false;
-       },
-       removeEmployee:(state)=>{
-            state.employee = null;
-            state.isLoading = false;
-       }
+    removeEmployee: (state) => {
+      state.employee = null;
+      state.isLoading = false;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loginEmployee.pending, (state)=>{
+      state.isLoading = true;
+    })
+    
+    builder.addCase(loginEmployee.fulfilled, (state, action) => {
+      state.employee = action.payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(loginEmployee.rejected, (state) => {
+      state.isLoading = false;
+    });
+  }
 
 });
 
