@@ -34,3 +34,64 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #3f3f46;
 }
+
+/* Vengeance UI Loading Keyframes */
+@keyframes vengeance-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes vengeance-reverse-spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes vengeance-pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.45));
+  }
+}
+
+@keyframes vengeance-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+.animate-vengeance-spin {
+  animation: vengeance-spin 2s linear infinite;
+}
+
+.animate-vengeance-spin-fast {
+  animation: vengeance-spin 0.8s linear infinite;
+}
+
+.animate-vengeance-reverse {
+  animation: vengeance-reverse-spin 3.5s linear infinite;
+}
+
+.animate-vengeance-pulse {
+  animation: vengeance-pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-vengeance-scan {
+  animation: vengeance-scan 1.8s ease-in-out infinite;
+}

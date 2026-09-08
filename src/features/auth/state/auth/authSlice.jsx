@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginEmployee } from "./authAction";
+import { currentLoggedInEmployee, loginEmployee } from "./authAction";
 
 const authSlice = createSlice({
   name: "auth",
@@ -30,6 +30,20 @@ const authSlice = createSlice({
     builder.addCase(loginEmployee.rejected, (state) => {
       state.isLoading = false;
     });
+
+    builder.addCase(currentLoggedInEmployee.pending, (state)=>{
+      state.isLoading = true;
+    })
+    
+    builder.addCase(currentLoggedInEmployee.fulfilled, (state, action) => {
+      state.employee = action.payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(currentLoggedInEmployee.rejected, (state) => {
+      state.isLoading = false;
+    });
+
   }
 
 });

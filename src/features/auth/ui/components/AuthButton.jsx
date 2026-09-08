@@ -1,5 +1,5 @@
 import React from 'react'
-import { Loader2 } from 'lucide-react'
+import { VengeanceSpinner } from './VengeanceLoader'
 import { cn } from '../../../../lib/utils'
 
 export const AuthButton = ({
@@ -41,7 +41,7 @@ export const AuthButton = ({
       )}
     >
       {isLoading ? (
-        <Loader2 className="w-4 h-4 animate-spin" />
+        <VengeanceSpinner size="sm" />
       ) : (
         <>
           {Icon && <Icon className="w-4 h-4 shrink-0" />}
