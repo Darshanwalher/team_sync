@@ -1,79 +1,84 @@
 @import "tailwindcss";
 
-/* =========================
-   DARK THEME (DEFAULT)
-========================= */
-:root {
-  /* COLORS */
-  --primary: #181422;
-  --secondary: #1D1B20;
-  --tertiary: #C9A74D;
+@custom-variant dark (&:where(.dark, .dark *));
 
-  --success: #22c55e;
-  --warning: #eab308;
-  --danger: #ef4444;
-
-  /* BACKGROUNDS */
-  --bg-main: #141218;
-  --bg-surface: #0F0D13;
-  --bg-card: #1e293b;
-  --bg-hover: #2b3548;
-
-  /* TEXT */
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-
-  /* BORDER */
-  --border-color: #2d3748;
-
-  /* SHADOW */
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
-
-  /* RADIUS */
-  --radius-md: 10px;
-}
-
-/* =========================
-   LIGHT THEME
-========================= */
-:root.light,
-html.light,
-body.light,
-.light {
-  /* COLORS */
-  --primary: #6063EE;
-  --secondary: #475569;
-  --tertiary: #c2410c;
-
-  --success: #16a34a;
-  --warning: #ca8a04;
-  --danger: #dc2626;
-
-  /* BACKGROUNDS */
-  --bg-main: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-card: #e2e8f0;
-  --bg-hover: #dbe4f0;
-
-  /* TEXT */
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
-
-  /* BORDER */
-  --border-color: #cbd5e1;
-
-  /* SHADOW */
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* =========================
-   GLOBAL BASE STYLES
-========================= */
 @layer base {
+
+  :root,
+  :root.light,
+  html.light,
+  body.light,
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.75rem;
+
+    /* Semantic Theme Tokens */
+    --bg-main: #ffffff;
+    --bg-surface: #fafafa;
+    --bg-card: #ffffff;
+    --bg-hover: #f4f4f5;
+    --text-primary: #09090b;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --border-color: #e4e4e7;
+  }
+
+  .dark,
+  :root.dark,
+  html.dark,
+  body.dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    /* Semantic Theme Tokens */
+    --bg-main: #09090b;
+    --bg-surface: #121215;
+    --bg-card: #18181b;
+    --bg-hover: #27272a;
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --border-color: #27272a;
+  }
+
   * {
     box-sizing: border-box;
+    border-color: var(--border-color);
   }
 
   html,
@@ -84,7 +89,7 @@ body.light,
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   }
 }
 
@@ -105,67 +110,4 @@ body.light,
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
-}
-
-/* =========================
-   VENGEANCE UI KEYFRAMES
-========================= */
-@keyframes vengeance-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes vengeance-reverse-spin {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes vengeance-pulse-glow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(0.98);
-    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.2));
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.02);
-    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.45));
-  }
-}
-
-@keyframes vengeance-scan {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(200%);
-  }
-}
-
-.animate-vengeance-spin {
-  animation: vengeance-spin 2s linear infinite;
-}
-
-.animate-vengeance-spin-fast {
-  animation: vengeance-spin 0.8s linear infinite;
-}
-
-.animate-vengeance-reverse {
-  animation: vengeance-reverse-spin 3.5s linear infinite;
-}
-
-.animate-vengeance-pulse {
-  animation: vengeance-pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-vengeance-scan {
-  animation: vengeance-scan 1.8s ease-in-out infinite;
 }
