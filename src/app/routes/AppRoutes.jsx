@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import AuthLayout from "../layouts/AuthLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -19,68 +19,85 @@ import { currentLoggedInEmployee } from "../../features/auth/state/auth/authActi
 import PublicRoute from "../protectedRoutes/PublicRoute";
 import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
 
+const router = createBrowserRouter([
+  // =====================
+  // PUBLIC / AUTH ROUTES
+  // =====================
+  {
+    element: <PublicRoute />,
+    children: [
+      {
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/",
+            element: <Login />,
+          },
+          {
+            path: "/login",
+            element: <Login />,
+          },
+          {
+            path: "/register",
+            element: <Register />,
+          },
+        ],
+      },
+    ],
+  },
+
+  // =====================
+  // PROTECTED ROUTES
+  // =====================
+  {
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/home",
+        element: <DashboardLayout />,
+        children: [
+          {
+            path: "/home",
+            element: <Home />,
+          },
+        ],
+      },
+    ],
+  },
+
+  // =====================
+  // 404 FALLBACK
+  // =====================
+  {
+    path: "*",
+    element: <Navigate to="/" replace />,
+  },
+]);
+
 const AppRoutes = () => {
   const dispatch = useDispatch();
+  const { mode } = useSelector((state) => state.theme);
+
+  // Sync theme mode globally with document.documentElement & document.body
+  useEffect(() => {
+    const root = document.documentElement;
+    if (mode === "light") {
+      root.classList.remove("dark");
+      root.classList.add("light");
+      document.body.classList.remove("dark");
+      document.body.classList.add("light");
+    } else {
+      root.classList.remove("light");
+      root.classList.add("dark");
+      document.body.classList.remove("light");
+      document.body.classList.add("dark");
+    }
+  }, [mode]);
 
   // Check currently logged-in employee
   useEffect(() => {
     dispatch(currentLoggedInEmployee());
   }, [dispatch]);
-
-  const router = createBrowserRouter([
-    // =====================
-    // PUBLIC / AUTH ROUTES
-    // =====================
-    {
-      element: <PublicRoute />,
-      children: [
-        {
-          element: <AuthLayout />,
-          children: [
-            {
-              path: "/",
-              element: <Login />,
-            },
-            {
-              path: "/login",
-              element: <Login />,
-            },
-            {
-              path: "/register",
-              element: <Register />,
-            },
-          ],
-        },
-      ],
-    },
-
-    // =====================
-    // PROTECTED ROUTES
-    // =====================
-    {
-      element: <ProtectedRoute />,
-      children: [
-        {
-          path: "/home",
-          element: <DashboardLayout />,
-          children: [
-            {
-              path: "/home",
-              element: <Home />,
-            },
-          ],
-        },
-      ],
-    },
-
-    // =====================
-    // 404 FALLBACK
-    // =====================
-    {
-      path: "*",
-      element: <Navigate to="/" replace />,
-    },
-  ]);
 
   return <RouterProvider router={router} />;
 };

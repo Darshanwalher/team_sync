@@ -4,7 +4,7 @@ import { Outlet } from 'react-router'
 const DashboardLayout = () => {
   return (
     <div>
-        <h1>These is for nav</h1>
+      <h1>These is for nav</h1>
       <Outlet />
     </div>
   )

@@ -1,5 +1,76 @@
 @import "tailwindcss";
 
+/* =========================
+   DARK THEME (DEFAULT)
+========================= */
+:root {
+  /* COLORS */
+  --primary: #181422;
+  --secondary: #1D1B20;
+  --tertiary: #C9A74D;
+
+  --success: #22c55e;
+  --warning: #eab308;
+  --danger: #ef4444;
+
+  /* BACKGROUNDS */
+  --bg-main: #141218;
+  --bg-surface: #0F0D13;
+  --bg-card: #1e293b;
+  --bg-hover: #2b3548;
+
+  /* TEXT */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* BORDER */
+  --border-color: #2d3748;
+
+  /* SHADOW */
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+  /* RADIUS */
+  --radius-md: 10px;
+}
+
+/* =========================
+   LIGHT THEME
+========================= */
+:root.light,
+html.light,
+body.light,
+.light {
+  /* COLORS */
+  --primary: #6063EE;
+  --secondary: #475569;
+  --tertiary: #c2410c;
+
+  --success: #16a34a;
+  --warning: #ca8a04;
+  --danger: #dc2626;
+
+  /* BACKGROUNDS */
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #e2e8f0;
+  --bg-hover: #dbe4f0;
+
+  /* TEXT */
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  /* BORDER */
+  --border-color: #cbd5e1;
+
+  /* SHADOW */
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   GLOBAL BASE STYLES
+========================= */
 @layer base {
   * {
     box-sizing: border-box;
@@ -8,11 +79,12 @@
   html,
   body {
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #09090b;
-    color: #fafafa;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
@@ -27,15 +99,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
+  background: var(--border-color);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+  background: var(--text-muted);
 }
 
-/* Vengeance UI Loading Keyframes */
+/* =========================
+   VENGEANCE UI KEYFRAMES
+========================= */
 @keyframes vengeance-spin {
   from {
     transform: rotate(0deg);
