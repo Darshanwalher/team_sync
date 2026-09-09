@@ -9,14 +9,14 @@ const Home = () => {
   const handleThemeChange = () => {
     dispatch(toggleTheme())
   }
-  
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-4">Dashboard Home Page</h1>
       <p className="text-lg mb-6">
         Current Theme: <span className="font-semibold uppercase tracking-wider">{mode}</span>
       </p>
-      <button 
+      <button
         onClick={handleThemeChange}
         className="px-5 py-2.5 rounded-lg font-medium border transition-all cursor-pointer shadow-md hover:opacity-90 active:scale-95"
         style={{
